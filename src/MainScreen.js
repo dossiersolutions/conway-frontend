@@ -59,7 +59,11 @@ class MainScreen extends Component {
         <div className="MainScreenData">
           <div className="col-md-12" style={{textAlign: "center"}}>
             <h3 onClick={() => this.clickOnSelectGame("1")}>List of Games:</h3>
-            <Link to={"/game/" + "1"}>{"1"}</Link>
+            {
+              this.state.games.map((id) => {
+                return <Link to={"/game/" + id}>{id}</Link>
+              })
+            }
           </div>
           <hr/>
           <div>
