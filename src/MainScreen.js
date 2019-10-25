@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import GameScreen from "./GameScreen";
 import {Link} from "react-router-dom";
 import {getGameIds} from "./Controllers/GameController";
 import {createGame} from "./Controllers/GameController";
@@ -35,26 +34,7 @@ class MainScreen extends Component {
 
   }
 
-  openSingleGame() {
-    const {
-      selectedGame
-    } = this.state;
-
-    if (selectedGame) {
-      return (
-          <GameScreen/>
-      );
-    }
-    else {
-      return (
-          <div>All GAMES</div>
-      );
-    }
-  }
-
   render() {
-
-    console.log("this.state.games", this.state.games);
     return (
         <div className="MainScreenData">
           <div className="col-md-12" style={{textAlign: "center"}}>
@@ -75,7 +55,6 @@ class MainScreen extends Component {
               Start a new game
             </button>
           </div>
-          {this.openSingleGame()}
         </div>
     );
   }

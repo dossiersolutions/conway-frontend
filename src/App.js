@@ -7,6 +7,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import {GameScreen} from "./GameScreen";
 
 function App() {
   return (
@@ -14,13 +15,13 @@ function App() {
         <Router>
 
           <Switch>
-            <Route path="/">
-              <MainScreen/>
-            </Route>
             <Route path="/newGame">
               <MainScreen/>
             </Route>
-            <Route path="/game:gameId">
+            <Route path="/game/:gameId">
+              <GameScreen/>
+            </Route>
+            <Route path="/">
               <MainScreen/>
             </Route>
           </Switch>

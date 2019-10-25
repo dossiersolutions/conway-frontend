@@ -1,23 +1,41 @@
-import React, {Component} from "react";
+import React, {useEffect, useState} from "react";
+import {
+  Link,
+  useParams
+} from "react-router-dom";
 import {GameCanvas} from "./GameCanvas";
-import {GAME_STATE_BASIC, GameState} from "./GameState/GameState";
 
-class GameScreen extends Component {
-  constructor(props) {
-    super(props);
+export function GameScreen({}) {
 
-    this.state = {
-      canvasDefaultState: new GameState(GAME_STATE_BASIC, 1, 1, [1])
+  const {gameId} = useParams();
+  const [gameState, setGameState] = useState(null);
+  const [socket, setSocket] = useState(null);
+
+  useEffect(() => {
+    if(!socket) {
+      const ws = new WebSocket('ws://www.host.com/path');
+      if(ws) {
+        setSocket(ws);
+        ws.on('message', function incoming(data) {
+          console.log(data);
+        });
+      }
     }
-  }
 
-  render() {
-    return (
-        <div className="MainScreen" style={{marginBottom: "20px", marginTop: "10px"}}>
-          <GameCanvas gameState={this.state.canvasDefaultState}/>
-        </div>
+
+  }, []);
+
+  let gameCanvasJsx;
+  if(gameState) {
+    gameCanvasJsx = (
+        <GameCanvas
+        />
     );
   }
-}
 
-export default GameScreen;
+  return (
+      <div className="MainScreen" style={{marginBottom: "20px", marginTop: "10px"}}>
+        {gameCanvasJsx}
+      </div>
+  );
+}
