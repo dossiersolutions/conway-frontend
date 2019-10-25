@@ -1,6 +1,9 @@
 import React from "react";
 import {createGame} from "./Controllers/GameController";
 import {useHistory} from "react-router-dom";
+import {Button, FormSelect} from "shards-react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "shards-ui/dist/css/shards.min.css"
 
 export function NewGameScreen({}) {
 
@@ -11,19 +14,13 @@ export function NewGameScreen({}) {
         <h3>Create new game</h3>
         <label>
           Game type
-          <select
-              className="new-game-select"
-              onSelect={(value) => {
-                console.log("value", value);
-              }}
-          >
+          <FormSelect>
             <option value="basic">Basic</option>
-            <option value="something">Something else</option>
-          </select>
+            <option value="something">Something</option>
+          </FormSelect>
         </label>
         <br/>
-        <button
-            className="new-game-go"
+        <Button
             onClick={() => {
               createGame().then((res) => {
                 history.push("/game/" + res.id);
@@ -31,7 +28,7 @@ export function NewGameScreen({}) {
             }}
         >
           Go!
-        </button>
+        </Button>
       </div>
   );
 }

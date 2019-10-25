@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@stomp/stompjs": "^5.4.2",
+    "shards-react": "^1.0.3",
     "ws": "^7.2.0"
   }
 }
