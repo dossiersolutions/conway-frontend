@@ -1,34 +1,51 @@
 import React, {Component} from "react";
 import GameScreen from "./GameScreen";
+import {Link} from "react-router-dom";
+import {getGameIds} from "./Controllers/GameController";
+import {createGame} from "./Controllers/GameController";
 
 class MainScreen extends Component {
   constructor(props) {
     super(props);
 
+    this.getAllGames = this.getAllGames.bind(this);
+
     this.state = {
-      selectedGame: false
+      selectedGame: false,
+      games: [],
     }
   }
 
-  clickOnSelectGame(){
-    const{
-      selectedGame
-    } = this.state;
+  componentDidMount() {
+    setInterval(this.getAllGames, 1000);
+  }
 
-    this.setState({selectedGame : !selectedGame})
+  getAllGames() {
+    getGameIds().then(res => {
+      this.setState({
+        games: res,
+      })
+    })
+  }
+
+  getGameListJsx() {
+  }
+
+  clickOnSelectGame() {
+
   }
 
   openSingleGame() {
-    const{
+    const {
       selectedGame
     } = this.state;
 
-    if(selectedGame){
+    if (selectedGame) {
       return (
           <GameScreen/>
-    );
+      );
     }
-    else{
+    else {
       return (
           <div>All GAMES</div>
       );
@@ -36,16 +53,24 @@ class MainScreen extends Component {
   }
 
   render() {
+
+    console.log("this.state.games", this.state.games);
     return (
         <div className="MainScreenData">
           <div className="col-md-12" style={{textAlign: "center"}}>
-            <h3 onClick={() => this.clickOnSelectGame()}>List of Games:</h3>
+            <h3 onClick={() => this.clickOnSelectGame("1")}>List of Games:</h3>
+            <Link to={"/game/" + "1"}>{"1"}</Link>
           </div>
           <hr/>
           <div>
-            <h3>Start a new game</h3>
+            <button
+             onClick={() => {
+               createGame();
+             }}
+            >
+              Start a new game
+            </button>
           </div>
-
           {this.openSingleGame()}
         </div>
     );

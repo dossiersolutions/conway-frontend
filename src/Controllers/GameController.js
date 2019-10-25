@@ -1,4 +1,4 @@
-let baseUrl = "localhost:8080";
+let baseUrl = "http://localhost:8080/";
 
 export async function getGameIds() {
   return await fetch(baseUrl + "game", {method: 'GET'}).then(resp => resp.json())
@@ -12,7 +12,7 @@ export async function deleteGameById(id) {
   return await fetch(baseUrl + "game/" + id, {method: 'DELETE'})
 }
 
-export async function postGame(id, gameVariant) {
-  return await fetch(baseUrl + "game", {method: 'POST', body: JSON.stringify(id, gameVariant)}).then(
+export async function createGame(gameVariant) {
+  return await fetch(baseUrl + "game", {method: 'POST', body: JSON.stringify(gameVariant)}).then(
       resp => resp.json())
 }
