@@ -1,27 +1,52 @@
 import React, {Component} from "react";
+import GameScreen from "./GameScreen";
 
-class  MainScreen extends Component {
+class MainScreen extends Component {
+  constructor(props) {
+    super(props);
 
-  makeGameList() {
-    return (
-        null
-    )
+    this.state = {
+      selectedGame: false
+    }
   }
 
-  clickOnGameItem(){}
+  clickOnSelectGame(){
+    const{
+      selectedGame
+    } = this.state;
+
+    this.setState({selectedGame : !selectedGame})
+  }
+
+  openSingleGame() {
+    const{
+      selectedGame
+    } = this.state;
+
+    if(selectedGame){
+      return (
+          <GameScreen/>
+    );
+    }
+    else{
+      return (
+          <div>All GAMES</div>
+      );
+    }
+  }
 
   render() {
     return (
-        <div className="MainScreen" style={{marginBottom: "20px", marginTop: "10px"}}>
-          <hr/>
+        <div className="MainScreenData">
           <div className="col-md-12" style={{textAlign: "center"}}>
-            <h3>List of Games:</h3>
-            {this.makeGameList()}
+            <h3 onClick={() => this.clickOnSelectGame()}>List of Games:</h3>
           </div>
           <hr/>
           <div>
             <h3>Start a new game</h3>
           </div>
+
+          {this.openSingleGame()}
         </div>
     );
   }
