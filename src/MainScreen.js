@@ -61,16 +61,16 @@ class MainScreen extends Component {
             <h3 onClick={() => this.clickOnSelectGame("1")}>List of Games:</h3>
             {
               this.state.games.map((id) => {
-                return <Link to={"/game/" + id}>{id}</Link>
+                return <div><Link to={"/game/" + id}>{id}</Link></div>
               })
             }
           </div>
           <hr/>
           <div>
             <button
-             onClick={() => {
-               createGame();
-             }}
+                onClick={() => {
+                  createGame();
+                }}
             >
               Start a new game
             </button>
