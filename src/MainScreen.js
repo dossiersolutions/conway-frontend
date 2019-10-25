@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import {getGameIds} from "./Controllers/GameController";
-import {createGame} from "./Controllers/GameController";
 
 class MainScreen extends Component {
   constructor(props) {
@@ -47,13 +46,11 @@ class MainScreen extends Component {
           </div>
           <hr/>
           <div>
-            <button
-                onClick={() => {
-                  createGame();
-                }}
+            <Link
+                to={"/newGame/"}
             >
-              Start a new game
-            </button>
+              New Game
+            </Link>
           </div>
         </div>
     );
